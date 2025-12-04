@@ -435,7 +435,7 @@ main > div{
 }
 
 .bg-primary{
-    background-image: url(../assets/assets/bg-primary.svg) ;
+    background-image: url(./bg-primary.svg) ;
 }
 
 .hero .bg-primary{
@@ -940,7 +940,7 @@ main > div{
 
 
 .bg-dark{
-    background-image: url(../assets/assets/bg-dark.svg);
+    background-image: url(./bg-dark.svg);
     
 }
 
