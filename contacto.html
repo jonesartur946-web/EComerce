@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Contactos | WebFood</title>
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+ <link rel="stylesheet" href="./estilos.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+<style>
+:root{
+  --primary:#f9b233;
+  --dark:#0b0b0b;
+  --glass:rgba(255,255,255,.08);
+  --muted:#aaa;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--dark);
+  color:#fff;
+  font-family:Arial, sans-serif;
+  overflow-x:hidden;
+}
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:80px 20px;
+}
+
+/* ---------- HEADER ---------- */
+header{
+  background:#111;
+  border-bottom:1px solid #222;
+}
+header nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo a{
+  color:var(--primary);
+  font-size:1.6em;
+  font-weight:bold;
+  text-decoration:none;
+}
+.menu ul{
+  display:flex;
+  gap:20px;
+  list-style:none;
+}
+.menu a{color:#fff;text-decoration:none}
+.icons a{color:#fff;font-size:1.3em;margin-left:15px}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;
+  min-height:70vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    linear-gradient(135deg,#000000cc,#000000aa),
+    url("https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1600&q=80");
+  background-size:cover;
+  background-position:center;
+  overflow:hidden;
+}
+.hero h1{
+  font-size:clamp(2.2em,5vw,3.8em);
+}
+.hero p{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:1.1em;
+}
+
+/* ---------- GRAPHIC BLOBS ---------- */
+.blob{
+  position:absolute;
+  width:400px;
+  height:400px;
+  background:radial-gradient(circle,var(--primary),transparent 70%);
+  opacity:.25;
+  filter:blur(80px);
+  animation: float 12s infinite alternate;
+}
+.blob.one{top:-100px;left:-100px}
+.blob.two{bottom:-120px;right:-120px;animation-delay:3s}
+
+@keyframes float{
+  to{transform:translate(80px,-60px)}
+}
+
+/* ---------- INFO CARDS ---------- */
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+  margin-top:-100px;
+  position:relative;
+  z-index:2;
+}
+
+.contact-card{
+  background:var(--glass);
+  backdrop-filter:blur(15px);
+  padding:35px;
+  border-radius:24px;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.12);
+  opacity:0;
+  transform:translateY(40px);
+  transition:.7s;
+}
+.contact-card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.contact-card i{
+  font-size:3.2em;
+  color:var(--primary);
+  margin-bottom:15px;
+}
+.contact-card h3{
+  margin-bottom:10px;
+}
+.contact-card p{
+  color:var(--muted);
+  font-size:.95em;
+}
+
+/* ---------- FORM ---------- */
+.form-section{
+  margin-top:100px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.form-text{
+  opacity:0;
+  transform:translateX(-40px);
+  transition:.7s;
+}
+.form-text.show{
+  opacity:1;
+  transform:translateX(0);
+}
+.form-text h2{
+  font-size:2.3em;
+  margin-bottom:15px;
+}
+.form-text p{
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+form{
+  background:var(--glass);
+  backdrop-filter:blur(15px);
+  padding:40px;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.12);
+  opacity:0;
+  transform:translateX(40px);
+  transition:.7s;
+}
+form.show{
+  opacity:1;
+  transform:translateX(0);
+}
+.input-group{
+  margin-bottom:20px;
+}
+.input-group label{
+  display:block;
+  margin-bottom:6px;
+  font-size:.9em;
+}
+.input-group input,
+.input-group textarea{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:0;
+  outline:none;
+  background:#1a1a1a;
+  color:#fff;
+}
+textarea{resize:none;height:120px}
+
+button{
+  width:100%;
+  padding:15px;
+  border-radius:30px;
+  border:0;
+  cursor:pointer;
+  background:var(--primary);
+  font-size:1em;
+  font-weight:bold;
+  transition:.3s;
+}
+button:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px #f9b23355;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){
+  .form-section{
+    grid-template-columns:1fr;
+  }
+}
+
+/* ---------- FOOTER ---------- */
+.footer{
+  margin-top:120px;
+  background:
+    linear-gradient(180deg,#0b0b0b,#050505);
+  border-top:1px solid #222;
+  position:relative;
+  overflow:hidden;
+}
+
+.footer::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle,var(--primary),transparent 70%);
+  opacity:.08;
+  top:-200px;
+  right:-200px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:50px;
+  padding:80px 20px 50px;
+}
+
+.widget-footer h4{
+  margin-bottom:18px;
+  font-size:1.2em;
+  position:relative;
+}
+.widget-footer h4::after{
+  content:"";
+  width:35px;
+  height:3px;
+  background:var(--primary);
+  position:absolute;
+  bottom:-8px;
+  left:0;
+}
+
+.widget-footer ul{
+  list-style:none;
+}
+.widget-footer li{
+  margin-bottom:10px;
+}
+.widget-footer a{
+  color:#bbb;
+  text-decoration:none;
+  transition:.3s;
+}
+.widget-footer a:hover{
+  color:var(--primary);
+  padding-left:5px;
+}
+
+.logo-footer{
+  font-size:1.8em;
+  font-weight:bold;
+  color:var(--primary);
+  margin-bottom:15px;
+}
+
+.widget-footer p{
+  color:#aaa;
+  font-size:.95em;
+  line-height:1.6;
+}
+
+.address{
+  margin-top:15px;
+}
+.address i{
+  color:var(--primary);
+  margin-right:6px;
+}
+
+.socials{
+  display:flex;
+  gap:15px;
+  margin-top:20px;
+}
+.socials a{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#111;
+  color:#fff;
+  font-size:1.2em;
+  transition:.4s;
+}
+.socials a:hover{
+  background:var(--primary);
+  color:#000;
+  transform:translateY(-6px) rotate(8deg);
+  box-shadow:0 10px 25px #f9b23355;
+}
+
+.footer-bottom{
+  text-align:center;
+  padding:20px;
+  border-top:1px solid #222;
+  color:#777;
+  font-size:.9em;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+        <div class="container">
+          <nav>
+            <div class="left">
+              <div class="logo"><a href="#">webFood</a></div>
+              <div class="menu">
+                <ul>
+                  <li><a href="./index.html">Home</a></li>
+                  <li><a href="./menu.html">Menu</a></li>
+                  <li><a href="./servicoEntrega.html">Serviço de entrega</a></li>
+                  <li><a href="./localização.html">Localização</a></li>
+                  <li><a href="./contacto.html">Contacto</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="right">
+              <div class="icons">
+                <a href="#" class="s-trigger">
+                  <i class="ri-search-line search-icon"></i>
+                  <i class="ri-close-line close-icon"></i>
+                </a>
+                <a href="#" class="icart">
+                  <i class="ri-shopping-cart-line"></i>
+                  <span class="number">0</span>
+                </a>
+                <a href="#" class="m-trigger mobile-only">
+                  <i class="ri-menu-line"></i>
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <form action="" class="search">
+          <div class="container">
+            <input type="search" placeholder="Pesquise para comer..." />
+          </div>
+        </form>
+      </header>
+
+<section class="hero">
+  <div class="blob one"></div>
+  <div class="blob two"></div>
+  <div>
+    <h1>Fale Connosco</h1>
+    <p>Estamos prontos para ouvir você e tornar sua experiência incrível</p>
+  </div>
+</section>
+
+<section class="container">
+
+  <div class="contact-grid">
+    <div class="contact-card animate">
+      <i class="ri-phone-line"></i>
+      <h3>Telefone</h3>
+      <p>+244 900 000 000</p>
+    </div>
+
+    <div class="contact-card animate">
+      <i class="ri-mail-line"></i>
+      <h3>Email</h3>
+      <p>contacto@webfood.com</p>
+    </div>
+
+    <div class="contact-card animate">
+      <i class="ri-map-pin-line"></i>
+      <h3>Localização</h3>
+      <p>Viana, Luanda – Angola</p>
+    </div>
+
+    <div class="contact-card animate">
+      <i class="ri-time-line"></i>
+      <h3>Horário</h3>
+      <p>Seg – Dom<br>08h00 – 23h00</p>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-text animate">
+      <h2>Envie uma mensagem</h2>
+      <p>
+        Dúvidas, sugestões ou parcerias?
+        Preencha o formulário e responderemos o mais rápido possível.
+      </p>
+    </div>
+
+    <form class="animate">
+      <div class="input-group">
+        <label>Nome</label>
+        <input type="text" placeholder="Seu nome">
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" placeholder="Seu email">
+      </div>
+
+      <div class="input-group">
+        <label>Mensagem</label>
+        <textarea placeholder="Escreva sua mensagem..."></textarea>
+      </div>
+
+      <button>Enviar Mensagem</button>
+    </form>
+  </div>
+
+</section>
+
+<script>
+// -------- SCROLL ANIMATION ----------
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.15});
+
+document.querySelectorAll(".animate").forEach(el=>{
+  observer.observe(el);
+});
+</script>
+<footer class="footer">
+  <div class="container footer-grid">
+
+    <div class="widget-footer animate">
+      <h4>WebFood</h4>
+      <ul>
+        <li><a href="#">Sobre Nós</a></li>
+        <li><a href="#">Destaques</a></li>
+        <li><a href="#">Nosso Menu</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+
+    <div class="widget-footer animate">
+      <h4>Ajuda</h4>
+      <ul>
+        <li><a href="#">Suporte</a></li>
+        <li><a href="#">Feedback</a></li>
+        <li><a href="#">Perguntas Frequentes</a></li>
+        <li><a href="#">Contactos</a></li>
+      </ul>
+    </div>
+
+    <div class="widget-footer about animate">
+      <div class="logo-footer">.webfood</div>
+      <p>
+        A WebFood conecta você aos melhores sabores da cidade.
+        Rapidez, qualidade e paixão por comida em cada entrega.
+      </p>
+      <p class="address">
+        <i class="ri-map-pin-line"></i>
+        Vila de Viana, Prédio dos Cubanos<br>
+        Próximo ao Elsamina
+      </p>
+
+      <ul class="socials">
+        <li><a href="#"><i class="ri-facebook-fill"></i></a></li>
+        <li><a href="#"><i class="ri-instagram-line"></i></a></li>
+        <li><a href="#"><i class="ri-twitter-x-line"></i></a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 WebFood — Desenvolvido por Dev-Jones Artur (Estudo)</p>
+  </div>
+</footer>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</body>
+</html>

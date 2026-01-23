@@ -1,0 +1,479 @@
+
+<!--
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Menu | WebFood</title>
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#f9b233;
+  --dark:#0f0f0f;
+  --card:#1c1c1c;
+  --muted:#aaa;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--dark);
+  color:#fff;
+  font-family:Arial, sans-serif;
+}
+.container{
+  max-width:1400px;
+  margin:auto;
+  padding:40px 20px;
+}
+header{
+  background:#111;
+  border-bottom:1px solid #222;
+}
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo a{
+  color:var(--primary);
+  font-size:1.6em;
+  font-weight:bold;
+  text-decoration:none;
+}
+.menu ul{
+  display:flex;
+  gap:20px;
+  list-style:none;
+}
+.menu a{color:#fff;text-decoration:none}
+.icons a{color:#fff;font-size:1.3em;margin-left:15px}
+
+h1{text-align:center;margin-bottom:30px}
+
+.cat-nav{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:40px;
+}
+.cat-nav button{
+  background:#222;
+  color:#fff;
+  border:0;
+  padding:10px 20px;
+  border-radius:30px;
+  cursor:pointer;
+}
+.cat-nav button.active{
+  background:var(--primary);
+  color:#000;
+}
+
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:30px;
+}
+
+.card{
+  background:var(--card);
+  border-radius:18px;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(40px);
+  transition:.5s;
+}
+.card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.card img{
+  width:100%;
+  height:190px;
+  object-fit:cover;
+}
+.info{padding:16px}
+.info p{color:var(--muted);font-size:.85em}
+.bottom{
+  display:flex;
+  justify-content:space-between;
+  margin-top:12px;
+}
+.price{color:var(--primary);font-weight:bold}
+.add{
+  background:var(--primary);
+  border:0;
+  padding:10px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo"><a href="#">webFood</a></div>
+      <div class="menu">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Entrega</a></li>
+          <li><a href="#">Localização</a></li>
+        </ul>
+      </div>
+      <div class="icons">
+        <a href="#"><i class="ri-search-line"></i></a>
+        <a href="#"><i class="ri-shopping-cart-line"></i></a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <h1>Nosso Menu</h1>
+  <div class="cat-nav" id="catNav"></div>
+  <div class="menu-grid" id="menuGrid"></div>
+</main>
+
+<script>
+const data={
+  panificacao:[
+    "https://images.unsplash.com/photo-1608198093002-ad4e005484ec",
+    "https://images.unsplash.com/photo-1549931319-a545dcf3bc73",
+    "https://images.unsplash.com/photo-1586444248879-8d7d2f0b8c5d",
+    "https://images.unsplash.com/photo-1604908554168-6b1db5b6f77f",
+    "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5",
+    "https://images.unsplash.com/photo-1608198093002-ad4e005484ec"
+  ],
+  guarnicoes:[
+    "https://images.unsplash.com/photo-1604908177522-050cbfcaa56d",
+    "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+    "https://images.unsplash.com/photo-1601050690597-df0568f70950",
+    "https://images.unsplash.com/photo-1559847844-5315695dadae",
+    "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
+    "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe"
+  ],
+  ervas:[
+    "https://images.unsplash.com/photo-1587334274328-64186a80aeee",
+    "https://images.unsplash.com/photo-1524593119771-d8b9fbc6f5d4",
+    "https://images.unsplash.com/photo-1615486364462-ef636d9fa4ed",
+    "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2",
+    "https://images.unsplash.com/photo-1604908177522-050cbfcaa56d",
+    "https://images.unsplash.com/photo-1587334274328-64186a80aeee"
+  ],
+nozes:[
+  "https://images.unsplash.com/photo-1603052875302-d376b7c0638a", // mix de nozes
+  "https://images.unsplash.com/photo-1576402187878-974f70c890a5", // nozes em close
+  "https://images.unsplash.com/photo-1590080876087-08c4b1e7e9a1", // amêndoas
+  "https://images.unsplash.com/photo-1615485290197-cc2d9cbb18ce", // frutos secos
+  "https://images.unsplash.com/photo-1542838687-0b95a1c6f6fd", // walnuts
+  "https://images.unsplash.com/photo-1547514701-42782101795e"  // castanhas
+]
+,
+  frutos:[
+    "https://images.unsplash.com/photo-1617191519400-6d0f3e9a2c6c",
+    "https://images.unsplash.com/photo-1553621042-f6e147245754",
+    "https://images.unsplash.com/photo-1617191519400-6d0f3e9a2c6c",
+    "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+    "https://images.unsplash.com/photo-1553621042-f6e147245754",
+    "https://images.unsplash.com/photo-1504674900247-0877df9cc836"
+  ],
+  vegetais:[
+    "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
+    "https://images.unsplash.com/photo-1540420773420-3366772f4999",
+    "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2",
+    "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2",
+    "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
+    "https://images.unsplash.com/photo-1540420773420-3366772f4999"
+  ]
+};
+
+const names={
+  panificacao:"Produtos de Panificação",
+  guarnicoes:"Guarnições",
+  ervas:"Ervas Especiais",
+  nozes:"Nozes",
+  frutos:"Frutos do Mar",
+  vegetais:"Vegetais"
+};
+
+const nav=document.getElementById("catNav");
+const grid=document.getElementById("menuGrid");
+
+nav.innerHTML='<button class="active" data-cat="all">Todos</button>'+
+Object.keys(names).map(k=>`<button data-cat="${k}">${names[k]}</button>`).join("");
+
+function render(cat="all"){
+  grid.innerHTML="";
+  Object.keys(data).forEach(c=>{
+    if(cat!=="all" && c!==cat) return;
+    data[c].forEach((img,i)=>{
+      const card=document.createElement("div");
+      card.className="card";
+      card.innerHTML=`
+        <img src="${img}?w=600&auto=format" />
+        <div class="info">
+          <h3>${names[c]}</h3>
+          <p>Produto fresco selecionado</p>
+          <div class="bottom">
+            <span class="price">2.500 Kz</span>
+            <button class="add"><i class="ri-shopping-cart-line"></i></button>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+      observer.observe(card);
+    });
+  });
+}
+
+const observer=new IntersectionObserver(e=>{
+  e.forEach(x=>x.isIntersecting && x.target.classList.add("show"));
+},{threshold:.2});
+
+render();
+
+document.querySelectorAll(".cat-nav button").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".cat-nav button").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    render(b.dataset.cat);
+  };
+});
+</script>
+
+</body>
+
+</html>
+-->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Menu em Manutenção | WebFood</title>
+ <link rel="stylesheet" href="./estilos.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#f9b233;
+  --dark:#0f0f0f;
+  --card:#1c1c1c;
+  --muted:#aaa;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at top,#1a1a1a,#0b0b0b);
+  color:#fff;
+  font-family:Arial, sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* CARD PRINCIPAL */
+.maintenance{
+  background:var(--card);
+  border-radius:26px;
+  padding:50px 45px;
+  max-width:540px;
+  width:90%;
+  text-align:center;
+  box-shadow:0 40px 100px rgba(0,0,0,.7);
+  animation:float 4s ease-in-out infinite;
+}
+
+/* ÍCONE */
+.icon{
+  width:95px;
+  height:95px;
+  background:rgba(249,178,51,.15);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 25px;
+}
+.icon i{
+  font-size:44px;
+  color:var(--primary);
+}
+
+/* TEXTO */
+h1{
+  font-size:1.9em;
+  margin-bottom:10px;
+}
+p{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:30px;
+}
+
+/* STATUS */
+.status{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:center;
+  margin-bottom:35px;
+}
+.status span{
+  background:#222;
+  padding:10px 16px;
+  border-radius:22px;
+  font-size:.9em;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.status i{color:var(--primary)}
+
+/* CONTADOR */
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  margin-bottom:35px;
+}
+.time-box{
+  background:#111;
+  border-radius:16px;
+  width:90px;
+  padding:15px 10px;
+}
+.time-box strong{
+  display:block;
+  font-size:1.8em;
+  color:var(--primary);
+}
+.time-box span{
+  font-size:.75em;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+/* AÇÕES */
+.actions{
+  display:flex;
+  gap:15px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.actions a{
+  padding:13px 24px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:.3s;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.btn-primary{
+  background:var(--primary);
+  color:#000;
+}
+.btn-primary:hover{transform:translateY(-3px)}
+.btn-outline{
+  border:1px solid #333;
+  color:#fff;
+}
+.btn-outline:hover{
+  background:#222;
+}
+
+/* ANIMAÇÃO */
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="maintenance">
+  <div class="icon">
+    <i class="ri-restaurant-line"></i>
+  </div>
+
+  <h1>Menu temporariamente indisponível</h1>
+  <p>
+    O nosso menu está em manutenção 🍽️  
+    Estamos a atualizar os produtos e preços para lhe oferecer
+    uma experiência ainda melhor.
+  </p>
+
+  <div class="status">
+    <span><i class="ri-tools-line"></i> Em manutenção</span>
+    <span><i class="ri-shield-check-line"></i> Atualização segura</span>
+    <span><i class="ri-heart-line"></i> Pensado em si</span>
+  </div>
+
+  <div class="countdown">
+    <div class="time-box">
+      <strong id="h">03</strong>
+      <span>Horas</span>
+    </div>
+    <div class="time-box">
+      <strong id="m">00</strong>
+      <span>Min</span>
+    </div>
+    <div class="time-box">
+      <strong id="s">00</strong>
+      <span>Seg</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a href="index.html" class="btn-primary">
+      <i class="ri-home-4-line"></i> Voltar ao início
+    </a>
+    <a href="./contacto.html" class="btn-outline">
+      <i class="ri-customer-service-2-line"></i> Contactar suporte
+    </a>
+  </div>
+</div>
+
+<script>
+// -------- CONTADOR DE 3 HORAS --------
+let remaining = 3 * 60 * 60; // 3 horas em segundos
+
+const hEl = document.getElementById("h");
+const mEl = document.getElementById("m");
+const sEl = document.getElementById("s");
+
+function updateCountdown(){
+  const h = Math.floor(remaining / 3600);
+  const m = Math.floor((remaining % 3600) / 60);
+  const s = remaining % 60;
+
+  hEl.textContent = String(h).padStart(2,"0");
+  mEl.textContent = String(m).padStart(2,"0");
+  sEl.textContent = String(s).padStart(2,"0");
+
+  if(remaining > 0){
+    remaining--;
+  }
+}
+
+updateCountdown();
+setInterval(updateCountdown,1000);
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</body>
+</html>
