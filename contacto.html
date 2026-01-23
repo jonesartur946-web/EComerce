@@ -439,7 +439,7 @@ button:hover{
         <textarea placeholder="Escreva sua mensagem..."></textarea>
       </div>
 
-      <button>Enviar Mensagem</button>
+      <button onclick=feedback()>Enviar Mensagem</button>
     </form>
   </div>
 
@@ -459,6 +459,12 @@ const observer = new IntersectionObserver(entries=>{
 document.querySelectorAll(".animate").forEach(el=>{
   observer.observe(el);
 });
+
+ //Alerta
+ 
+function feedback(){
+    alert("Mensagem Enviada com sucesso!");
+}
 </script>
 <footer class="footer">
   <div class="container footer-grid">
