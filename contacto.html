@@ -5,7 +5,6 @@
 <title>Contactos | WebFood</title>
 
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
 <style>
 :root{
@@ -91,22 +90,6 @@ header nav{
   border-radius:50%;
 }
 
-/* ---------- SEARCH ---------- */
-.search{
-  display:none;
-  background:#0b0b0b;
-  border-top:1px solid #222;
-}
-
-.search input{
-  width:100%;
-  padding:18px;
-  background:#111;
-  border:0;
-  color:#fff;
-  outline:none;
-}
-
 /* ---------- HERO ---------- */
 .hero{
   min-height:70vh;
@@ -132,32 +115,12 @@ header nav{
   font-size:1.1em;
 }
 
-/* ---------- BLOBS ---------- */
-.blob{
-  position:absolute;
-  width:400px;
-  height:400px;
-  background:radial-gradient(circle,var(--primary),transparent 70%);
-  opacity:.25;
-  filter:blur(80px);
-  animation: float 12s infinite alternate;
-}
-
-.blob.one{top:-100px;left:-100px}
-.blob.two{bottom:-120px;right:-120px;animation-delay:3s}
-
-@keyframes float{
-  to{transform:translate(80px,-60px)}
-}
-
 /* ---------- CONTACT ---------- */
 .contact-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:30px;
   margin-top:-100px;
-  position:relative;
-  z-index:2;
 }
 
 .contact-card{
@@ -167,88 +130,6 @@ header nav{
   border-radius:24px;
   text-align:center;
   border:1px solid rgba(255,255,255,.12);
-  opacity:0;
-  transform:translateY(40px);
-  transition:.7s;
-}
-
-.contact-card.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.contact-card i{
-  font-size:3.2em;
-  color:var(--primary);
-  margin-bottom:15px;
-}
-
-/* ---------- FORM ---------- */
-.form-section{
-  margin-top:100px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:50px;
-}
-
-.form-text,
-form{
-  opacity:0;
-  transition:.7s;
-}
-
-.form-text{
-  transform:translateX(-40px);
-}
-
-.form-text.show{
-  opacity:1;
-  transform:translateX(0);
-}
-
-form{
-  background:var(--glass);
-  backdrop-filter:blur(15px);
-  padding:40px;
-  border-radius:30px;
-  border:1px solid rgba(255,255,255,.12);
-  transform:translateX(40px);
-}
-
-form.show{
-  opacity:1;
-  transform:translateX(0);
-}
-
-.input-group{
-  margin-bottom:20px;
-}
-
-.input-group label{
-  display:block;
-  margin-bottom:6px;
-}
-
-.input-group input,
-textarea{
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:0;
-  background:#1a1a1a;
-  color:#fff;
-}
-
-textarea{resize:none;height:120px}
-
-button{
-  width:100%;
-  padding:15px;
-  border-radius:30px;
-  border:0;
-  background:var(--primary);
-  font-weight:bold;
-  cursor:pointer;
 }
 
 /* ---------- FOOTER ---------- */
@@ -256,13 +137,6 @@ button{
   margin-top:120px;
   background:#050505;
   border-top:1px solid #222;
-}
-
-.footer-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:50px;
-  padding:80px 20px;
 }
 
 .footer-bottom{
@@ -273,7 +147,11 @@ button{
 }
 
 /* ---------- MOBILE MENU ---------- */
-.mobile-only{display:none}
+
+/* botão hamburguer NUNCA aparece por padrão */
+.m-trigger{
+  display:none;
+}
 
 .mobile-menu-overlay{
   position:fixed;
@@ -314,11 +192,17 @@ button{
   font-size:1.05em;
 }
 
-/* ---------- RESPONSIVE ---------- */
-@media(max-width:900px){
-  .menu{display:none}
-  .mobile-only{display:inline-block}
-  .form-section{grid-template-columns:1fr}
+/* ---------- RESPONSIVE (MOBILE) ---------- */
+@media (max-width:768px){
+
+  .menu{
+    display:none;
+  }
+
+  .m-trigger{
+    display:inline-block;
+  }
+
 }
 </style>
 </head>
@@ -330,6 +214,7 @@ button{
     <nav>
       <div class="left">
         <div class="logo"><a href="#">webFood</a></div>
+
         <div class="menu">
           <ul>
             <li><a href="./index.html">Home</a></li>
@@ -342,12 +227,10 @@ button{
       </div>
 
       <div class="icons">
-        <a href="#"><i class="ri-search-line"></i></a>
-        <a href="#" class="icart">
-          <i class="ri-shopping-cart-line"></i>
-          <span class="number">0</span>
-        </a>
-        <a href="#" class="m-trigger mobile-only">
+        <a href="#"><i class="ri-shopping-cart-line"></i></a>
+
+        <!-- BOTÃO MOBILE -->
+        <a href="#" class="m-trigger">
           <i class="ri-menu-line"></i>
         </a>
       </div>
@@ -357,6 +240,7 @@ button{
 
 <!-- MENU LATERAL MOBILE -->
 <div class="mobile-menu-overlay"></div>
+
 <aside class="mobile-menu">
   <div class="mobile-menu-header">
     <span>Menu</span>
@@ -372,8 +256,6 @@ button{
 </aside>
 
 <section class="hero">
-  <div class="blob one"></div>
-  <div class="blob two"></div>
   <div>
     <h1>Fale Connosco</h1>
     <p>Estamos prontos para ouvir você</p>
@@ -382,10 +264,9 @@ button{
 
 <section class="container">
   <div class="contact-grid">
-    <div class="contact-card animate"><i class="ri-phone-line"></i><h3>Telefone</h3><p>+244 900 000 000</p></div>
-    <div class="contact-card animate"><i class="ri-mail-line"></i><h3>Email</h3><p>contacto@webfood.com</p></div>
-    <div class="contact-card animate"><i class="ri-map-pin-line"></i><h3>Localização</h3><p>Viana, Luanda</p></div>
-    <div class="contact-card animate"><i class="ri-time-line"></i><h3>Horário</h3><p>08h – 23h</p></div>
+    <div class="contact-card">📞 +244 900 000 000</div>
+    <div class="contact-card">📧 contacto@webfood.com</div>
+    <div class="contact-card">📍 Viana, Luanda</div>
   </div>
 </section>
 
@@ -396,31 +277,19 @@ button{
 </footer>
 
 <script>
-/* ANIMAÇÕES */
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add("show");
-      observer.unobserve(e.target);
-    }
-  });
-});
-document.querySelectorAll(".animate").forEach(el=>observer.observe(el));
-
-/* MENU MOBILE */
 const menuBtn = document.querySelector('.m-trigger');
 const mobileMenu = document.querySelector('.mobile-menu');
 const overlay = document.querySelector('.mobile-menu-overlay');
 const closeBtn = document.querySelector('.close-mobile');
 
-menuBtn.onclick = e => {
+menuBtn.onclick = e =>{
   e.preventDefault();
   mobileMenu.classList.add('active');
   overlay.classList.add('active');
-};
+}
 
-closeBtn.onclick = closeMenu;
 overlay.onclick = closeMenu;
+closeBtn.onclick = closeMenu;
 
 function closeMenu(){
   mobileMenu.classList.remove('active');
