@@ -2,18 +2,12 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Serviço de Entrega | WebFood</title>
 
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
- <link rel="stylesheet" href="./estilos.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
 <style>
 :root{
   --primary:#f9b233;
@@ -22,19 +16,113 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
   font-family:Arial, Helvetica, sans-serif;
   background:var(--dark);
   color:#fff;
   line-height:1.6;
 }
+
 .container{
   max-width:1200px;
   margin:auto;
   padding:0 20px;
 }
 
-/* ---------- HERO ---------- */
+/* ================= HEADER ================= */
+header{
+  background:#000;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  height:80px;
+}
+
+.left{
+  display:flex;
+  align-items:center;
+  gap:40px;
+}
+
+.logo a{
+  font-size:1.6em;
+  font-weight:bold;
+  color:#fff;
+  text-decoration:none;
+}
+
+.menu ul{
+  display:flex;
+  gap:25px;
+  list-style:none;
+}
+
+.menu a{
+  color:#ccc;
+  text-decoration:none;
+  font-weight:500;
+}
+
+.menu a:hover{
+  color:var(--primary);
+}
+
+.icons{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.icons a{
+  color:#fff;
+  font-size:1.3em;
+  position:relative;
+}
+
+.number{
+  position:absolute;
+  top:-6px;
+  right:-10px;
+  background:var(--primary);
+  color:#000;
+  font-size:.7em;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+/* 🔒 Mobile button escondido por padrão (DESKTOP) */
+.mobile-only{
+  display:none;
+}
+
+/* ================= SEARCH ================= */
+.search{
+  display:none;
+  background:#080808;
+  padding:15px 0;
+}
+
+.search input{
+  width:100%;
+  padding:12px 18px;
+  border-radius:30px;
+  border:none;
+  outline:none;
+}
+
+/* ================= HERO ================= */
 .hero{
   min-height:90vh;
   background:
@@ -44,17 +132,21 @@ body{
   display:flex;
   align-items:center;
 }
+
 .hero-content{
   max-width:600px;
 }
+
 .hero h1{
   font-size:3.2em;
   margin-bottom:15px;
 }
+
 .hero p{
   color:#ddd;
   margin-bottom:30px;
 }
+
 .hero a{
   display:inline-flex;
   align-items:center;
@@ -67,45 +159,52 @@ body{
   text-decoration:none;
 }
 
-/* ---------- BENEFÍCIOS ---------- */
+/* ================= BENEFÍCIOS ================= */
 .benefits{
   margin-top:-70px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:30px;
 }
+
 .benefit{
   background:var(--card);
   padding:30px;
   border-radius:18px;
   text-align:center;
 }
+
 .benefit i{
   font-size:3em;
   color:var(--primary);
   margin-bottom:15px;
 }
 
-/* ---------- COMO FUNCIONA ---------- */
+/* ================= SECTIONS ================= */
 .section{
   padding:100px 0;
 }
+
 .section h2{
   text-align:center;
   font-size:2.4em;
   margin-bottom:60px;
 }
+
+/* ================= STEPS ================= */
 .steps{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:30px;
 }
+
 .step{
   background:#121212;
   padding:35px;
   border-radius:20px;
   position:relative;
 }
+
 .step span{
   position:absolute;
   top:-15px;
@@ -120,53 +219,53 @@ body{
   align-items:center;
   justify-content:center;
 }
+
 .step i{
   font-size:2.2em;
   color:var(--primary);
   margin-bottom:15px;
 }
 
-/* ---------- ERGONOMIA ---------- */
+/* ================= ERGONOMIC ================= */
 .ergonomic{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:50px;
   align-items:center;
 }
+
 .ergonomic img{
   width:100%;
   border-radius:25px;
 }
-@media(max-width:900px){
-  .ergonomic{grid-template-columns:1fr}
-}
 
-/* ---------- FOOTER ---------- */
+/* ================= FOOTER ================= */
 footer{
   background:#080808;
   margin-top:100px;
   padding:80px 0 30px;
 }
+
 .footer-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:40px;
 }
-.footer h4{
-  margin-bottom:15px;
-}
+
 .footer a{
   color:#aaa;
   text-decoration:none;
 }
+
 .footer a:hover{
   color:var(--primary);
 }
+
 .socials{
   display:flex;
   gap:15px;
-  margin-top:15px;
 }
+
 .socials a{
   width:42px;
   height:42px;
@@ -175,156 +274,109 @@ footer{
   align-items:center;
   justify-content:center;
   border-radius:50%;
-  font-size:1.2em;
-  color:#fff;
-}
-.socials a:hover{
-  background:var(--primary);
-  color:#000;
-}
-.copy{
-  text-align:center;
-  margin-top:50px;
-  color:#666;
 }
 
-/* ---------- ANIMAÇÃO ---------- */
+/* ================= ANIMAÇÃO ================= */
 .animate{
   opacity:0;
   transform:translateY(40px);
   transition:.7s ease;
 }
+
 .animate.show{
   opacity:1;
   transform:translateY(0);
+}
+
+/* ================= RESPONSIVO ================= */
+@media (max-width:768px){
+
+  .menu{
+    display:none;
+  }
+
+  /* ✅ Botão ☰ APENAS NO MOBILE */
+  .mobile-only{
+    display:inline-flex;
+  }
+
+  .hero h1{
+    font-size:2.3em;
+  }
+
+  .ergonomic{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
 
 <body>
- <header>
-        <div class="container">
-          <nav>
-            <div class="left">
-              <div class="logo"><a href="#">webFood</a></div>
-              <div class="menu">
-                <ul>
-                  <li><a href="./index.html">Home</a></li>
-                  <li><a href="./menu.html">Menu</a></li>
-                  <li><a href="./servicoEntrega.html">Serviço de entrega</a></li>
-                  <li><a href="./localização.html">Localização</a></li>
-                  <li><a href="./contacto.html">Contacto</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="right">
-              <div class="icons">
-                <a href="#" class="s-trigger">
-                  <i class="ri-search-line search-icon"></i>
-                  <i class="ri-close-line close-icon"></i>
-                </a>
-                <a href="#" class="icart">
-                  <i class="ri-shopping-cart-line"></i>
-                  <span class="number">0</span>
-                </a>
-                <a href="#" class="m-trigger mobile-only">
-                  <i class="ri-menu-line"></i>
-                </a>
-              </div>
-            </div>
-          </nav>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="left">
+        <div class="logo"><a href="#">WebFood</a></div>
+        <div class="menu">
+          <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./menu.html">Menu</a></li>
+            <li><a href="./servicoEntrega.html">Serviço</a></li>
+            <li><a href="./localização.html">Localização</a></li>
+            <li><a href="./contacto.html">Contacto</a></li>
+          </ul>
         </div>
-        <form action="" class="search">
-          <div class="container">
-            <input type="search" placeholder="Pesquise para comer..." />
-          </div>
-        </form>
-      </header>
+      </div>
+
+      <div class="icons">
+        <a href="#"><i class="ri-search-line"></i></a>
+        <a href="#" class="icart">
+          <i class="ri-shopping-cart-line"></i>
+          <span class="number">0</span>
+        </a>
+        <!-- ☰ Mobile -->
+        <a href="#" class="mobile-only">
+          <i class="ri-menu-line"></i>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
 
 <!-- HERO -->
 <section class="hero">
   <div class="container hero-content animate">
     <h1>Entrega Inteligente & Rápida</h1>
-    <p>
-      Desenvolvemos um serviço ergonómico, simples e eficiente
-      para você receber sua comida sem esforço.
-    </p>
+    <p>Serviço simples, eficiente e pensado para o utilizador.</p>
     <a href="#steps"><i class="ri-motorbike-line"></i> Ver como funciona</a>
   </div>
 </section>
 
 <!-- BENEFÍCIOS -->
 <section class="container benefits">
-  <div class="benefit animate"><i class="ri-time-line"></i><h3>Rápido</h3><p>Entrega otimizada por rotas inteligentes.</p></div>
-  <div class="benefit animate"><i class="ri-shield-check-line"></i><h3>Seguro</h3><p>Embalagens lacradas e higienizadas.</p></div>
-  <div class="benefit animate"><i class="ri-map-pin-line"></i><h3>Local</h3><p>Cobertura nas principais zonas.</p></div>
-  <div class="benefit animate"><i class="ri-smartphone-line"></i><h3>Simples</h3><p>Poucos cliques, zero confusão.</p></div>
+  <div class="benefit animate"><i class="ri-time-line"></i><h3>Rápido</h3></div>
+  <div class="benefit animate"><i class="ri-shield-check-line"></i><h3>Seguro</h3></div>
+  <div class="benefit animate"><i class="ri-map-pin-line"></i><h3>Local</h3></div>
+  <div class="benefit animate"><i class="ri-smartphone-line"></i><h3>Simples</h3></div>
 </section>
 
-<!-- PASSOS -->
-<section id="steps" class="section">
-  <div class="container">
-    <h2 class="animate">Como Funciona</h2>
-    <div class="steps">
-      <div class="step animate"><span>1</span><i class="ri-restaurant-line"></i><h4>Escolha</h4><p>Selecione o prato.</p></div>
-      <div class="step animate"><span>2</span><i class="ri-shopping-cart-line"></i><h4>Confirme</h4><p>Finalize o pedido.</p></div>
-      <div class="step animate"><span>3</span><i class="ri-motorbike-line"></i><h4>Entrega</h4><p>A caminho.</p></div>
-      <div class="step animate"><span>4</span><i class="ri-emotion-happy-line"></i><h4>Aproveite</h4><p>Comida quente.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ERGONOMIA -->
-<section class="section">
-  <div class="container ergonomic">
-    <div class="animate">
-      <h2>Design Pensado no Utilizador</h2>
-      <p>
-        Cada etapa foi desenhada para reduzir esforço cognitivo,
-        facilitar decisões e melhorar a experiência.
-      </p>
-    </div>
-    <img class="animate" src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <h4>WebFood</h4>
-      <p>Entrega rápida, simples e segura.</p>
-    </div>
-    <div>
-      <h4>Links</h4>
-      <a href="#">Menu</a><br>
-      <a href="#">Entrega</a><br>
-      <a href="#">Contactos</a>
-    </div>
-    <div>
-      <h4>Social</h4>
-      <div class="socials">
-        <a href="#"><i class="ri-facebook-fill"></i></a>
-        <a href="#"><i class="ri-instagram-line"></i></a>
-        <a href="#"><i class="ri-twitter-x-line"></i></a>
-      </div>
-    </div>
-  </div>
+<footer>
   <div class="copy">© 2026 WebFood — Projeto de Estudo</div>
 </footer>
 
 <script>
-const obs = new IntersectionObserver(e=>{
-  e.forEach(i=>{
-    if(i.isIntersecting){
-      i.target.classList.add("show");
-      obs.unobserve(i.target);
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("show");
+      obs.unobserve(e.target);
     }
   })
 },{threshold:.15});
 
 document.querySelectorAll(".animate").forEach(el=>obs.observe(el));
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 </body>
 </html>
