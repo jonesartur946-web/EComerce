@@ -78,10 +78,13 @@ nav{
   gap:20px;
 }
 
-.icons a{
+.icons a, .icons button{
   color:#fff;
   font-size:1.3em;
   position:relative;
+  background:none;
+  border:none;
+  cursor:pointer;
 }
 
 .number{
@@ -141,21 +144,6 @@ nav{
   text-decoration:none;
 }
 
-/* ================= BENEFÍCIOS ================= */
-.benefits{
-  margin-top:-70px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:30px;
-}
-
-.benefit{
-  background:var(--card);
-  padding:30px;
-  border-radius:18px;
-  text-align:center;
-}
-
 /* ================= MENU LATERAL MOBILE ================= */
 .overlay{
   position:fixed;
@@ -193,6 +181,10 @@ nav{
   color:#fff;
   text-decoration:none;
   font-size:1.1em;
+}
+
+.mobile-menu a:hover{
+  color:var(--primary);
 }
 
 .close-menu{
@@ -258,9 +250,9 @@ nav{
           <i class="ri-shopping-cart-line"></i>
           <span class="number">0</span>
         </a>
-        <a href="#" class="mobile-only">
+        <button class="mobile-only" aria-label="Abrir menu">
           <i class="ri-menu-line"></i>
-        </a>
+        </button>
       </div>
     </nav>
   </div>
@@ -269,7 +261,7 @@ nav{
 <div class="overlay" id="overlay"></div>
 
 <aside class="mobile-menu" id="mobileMenu">
-  <button class="close-menu" id="closeMenu">
+  <button class="close-menu" id="closeMenu" aria-label="Fechar menu">
     <i class="ri-close-line"></i>
   </button>
 
@@ -296,8 +288,7 @@ const closeMenu = document.getElementById('closeMenu');
 const mobileMenu = document.getElementById('mobileMenu');
 const overlay = document.getElementById('overlay');
 
-openMenu.addEventListener('click', (e)=>{
-  e.preventDefault();
+openMenu.addEventListener('click', ()=>{
   mobileMenu.classList.add('active');
   overlay.classList.add('active');
 });
